@@ -1,0 +1,49 @@
+"""import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+"""
+
+from beeval.utils import component_logger
+
+import argparse
+from beeval.configs import D_ALL_DATASETS
+
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset',
+                        type=str,
+                        default= None,
+                        help=f"The dataset you want to compute the correlation. "
+                             f"It has to be in: \n {D_ALL_DATASETS.keys()} \n"
+                             f"If None, all the datasets will be computed.")
+
+    parser.add_argument('--path_data',
+                        type=str,
+                        default='data',
+                        help=f"The path where the dataset file is stored. "
+                             f"By default BEEval/data.")
+
+    parser.add_argument('--use_cache',
+                        default=True,
+                        type=bool,
+                        help=f"If False the processed files will be overwritten.")
+
+    args = parser.parse_args()
+
+    configs = D_ALL_DATASETS.keys()
+    if args.dataset is not None:
+        assert args.dataset in D_ALL_DATASETS
+        configs =[args.dataset]
+
+    for config_name in configs:
+        component_logger.info(f'Config {config_name} loaded. Computing the metrics.')
+        config = D_ALL_DATASETS[config_name]()
+        config.pipeline(
+            path_data=args.path_data,
+            use_cache=args.use_cache
+        )
+
+if __name__ == "__main__":
+    main()
+
+
