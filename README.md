@@ -1,3 +1,4 @@
+# BEAMetrics: Benchmark to Evaluate Automatic Metrics in Natural Language Generation
 
 ## Installing The Dependencies
 ```
@@ -9,7 +10,10 @@ $ conda activate beametrics
 (beametrics) $ conda install pytorch cudatoolkit=10.1 -c pytorch
 ```
 
-# Computing the correlations:
+## Download the data
+All the dataset can be downloaded from [this zip file](https://drive.google.com/file/d/1axODMMTTeFUigkyC-JBoE8TgXsDA-CpJ/view?usp=sharing). It needs to be unzipped into the path data before running the correlations.
+
+## Computing the correlations
 
 Processing the files to a clean json with the metrics computed:
 ```
