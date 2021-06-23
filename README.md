@@ -10,9 +10,18 @@ $ conda activate beametrics
 (beametrics) $ conda install pytorch cudatoolkit=10.1 -c pytorch
 ```
 
+Install BEAMetrics:
+```
+(beametrics) $ cd BEAMetrics
+(beametrics) $ pip install -e .
+```
+
 ## Download the data
 All the dataset can be downloaded from [this zip file](https://drive.google.com/file/d/1axODMMTTeFUigkyC-JBoE8TgXsDA-CpJ/view?usp=sharing). It needs to be unzipped into the path data before running the correlations.
-
+```
+cd data/raw
+unzip data.zip
+```
 ## Computing the correlations
 
 Processing the files to a clean json with the metrics computed:
@@ -23,6 +32,7 @@ The optional argument *--dataset* allows to compute only on a specific dataset, 
 
 
 TODO: 
-- mode per nb of ref
+- add questeval in requirements
 - clean readme with install and a printable result 
+- add the data into HF to automatically download it
 - allow to dynamically set new external metrics / remove one when running a config
