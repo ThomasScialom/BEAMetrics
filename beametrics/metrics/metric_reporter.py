@@ -1,7 +1,7 @@
 from typing import List, Dict, Tuple, Any
-from beeval.utils import component_logger
+from beametrics.utils import component_logger
 
-from beeval.metrics.metrics import (
+from beametrics.metrics.metrics import (
     MetricBaseHFSrcRef,
     MetricBaseHFRef,
     MetricSacreBleu,
@@ -13,7 +13,7 @@ from beeval.metrics.metrics import (
     MetricQuestEval,
 )
 
-_DEFAULT_METRIC_NAMES = ('rouge', 'sacrebleu', 'meteor', 'bertscore', 'questeval') #'bleurt',
+_DEFAULT_METRIC_NAMES = ('rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt', 'questeval')
 
 class MetricReporter():
     """
@@ -110,7 +110,7 @@ class MetricReporter():
         if metric_names is None:
             metric_names = self.metric_names
         for metric_name in metric_names:
-            component_logger.info(metric_name)
+            component_logger.info(f'Computing {metric_name}')
             if self.d_metrics[metric_name] is None:
                 self.load_metric(metric_name)
             metric = self.d_metrics[metric_name]

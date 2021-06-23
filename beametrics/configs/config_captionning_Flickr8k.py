@@ -1,6 +1,6 @@
 import pickle
-from beeval.configs.config_base import ConfigBase
-from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+from beametrics.configs.config_base import ConfigBase
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class CaptioningFlickr8k(ConfigBase):
     def __init__(self):
@@ -10,7 +10,7 @@ class CaptioningFlickr8k(ConfigBase):
         metric_names = _DEFAULT_METRIC_NAMES
         language = "en"
         task = "captioning"
-        nb_refs = 50
+        nb_refs = 5
 
         dimensions = ('score', )
 

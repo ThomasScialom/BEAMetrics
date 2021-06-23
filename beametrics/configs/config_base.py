@@ -3,8 +3,8 @@ import os
 import json
 from scipy.stats import pearsonr
 
-from beeval.metrics.metric_reporter import MetricReporter
-from beeval.utils import component_logger
+from beametrics.metrics.metric_reporter import MetricReporter
+from beametrics.utils import component_logger
 
 class ConfigBase:
     """

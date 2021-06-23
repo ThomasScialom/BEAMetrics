@@ -1,4 +1,4 @@
-from easse.fkgl import corpus_fkgl
+# todo: from easse.fkgl import corpus_fkgl
 from questeval.questeval_metric import QuestEval
 
 from typing import List, Dict

@@ -1,6 +1,6 @@
 import pickle
-from beeval.configs.config_base import ConfigBase
-from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+from beametrics.configs.config_base import ConfigBase
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 
 class CaptioningComposite(ConfigBase):

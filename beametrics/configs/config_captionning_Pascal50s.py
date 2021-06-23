@@ -1,7 +1,7 @@
-from typing import List, Dict
+from typing import Tuple, Dict
 import pickle
-from beeval.configs.config_base import ConfigBase
-from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+from beametrics.configs.config_base import ConfigBase
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class CaptioningPascal50s(ConfigBase):
     def __init__(self):
@@ -74,25 +74,34 @@ class CaptioningPascal50s(ConfigBase):
 
     def fill_rank(
             self,
-            d_data: Dict,
-            dim_1s: List[str],
-            dim_2s: List[str]
+            d_data: Dict[str, Dict],
+            ref_key: str,
+            dim_humans: Tuple[str],
+            dim_metrics: Tuple[str]
     ):
 
-        dim_1s = self.dimensions
+        def get_rank(m1, m2):
+            if m1 >= m2:
+                rank1 = 1
+                rank2 = 0
+            else:
+                rank1 = 0
+                rank2 = 1
+            return rank1, rank2
+
         for ex_id in range(0, len(d_data), 2):
-            for metric in set(dim_1s + dim_2s):
-                m1 = d_data[str(ex_id)][metric]
-                m2 = d_data[str(ex_id + 1)][metric]
+            for dim_h in dim_humans:
+                m1 = d_data[str(ex_id)][dim_h]
+                m2 = d_data[str(ex_id + 1)][dim_h]
+                rank1, rank2 = get_rank(m1, m2)
+                d_data[str(ex_id)][dim_h] = rank1
+                d_data[str(ex_id + 1)][dim_h] = rank2
 
-                if m1 >= m2:
-                    rank1 = 1
-                    rank2 = 0
-                else:
-                    rank1 = 0
-                    rank2 = 1
-
-                d_data[str(ex_id)][metric] = rank1
-                d_data[str(ex_id + 1)][metric] = rank2
+            for metric in dim_metrics:
+                m1 = d_data[str(ex_id)][ref_key][metric]
+                m2 = d_data[str(ex_id + 1)][ref_key][metric]
+                rank1, rank2 = get_rank(m1, m2)
+                d_data[str(ex_id)][ref_key][metric] = rank1
+                d_data[str(ex_id + 1)][ref_key][metric] = rank2
 
         return d_data

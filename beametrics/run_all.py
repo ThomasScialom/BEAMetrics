@@ -2,10 +2,10 @@
 os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 """
 
-from beeval.utils import component_logger
+from beametrics.utils import component_logger
 
 import argparse
-from beeval.configs import D_ALL_DATASETS
+from beametrics.configs import D_ALL_DATASETS
 
 def main():
 
@@ -36,7 +36,8 @@ def main():
         configs =[args.dataset]
 
     for config_name in configs:
-        component_logger.info(f'Config {config_name} loaded. Computing the metrics.')
+        component_logger.info(f'________________________________________________\n'
+                              f'Config {config_name} loaded. Computing the pipeline.')
         config = D_ALL_DATASETS[config_name]()
         config.pipeline(
             path_data=args.path_data,

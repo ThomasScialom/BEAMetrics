@@ -1,3 +1,7 @@
 transformers==4.6.1
 datasets==1.7.0
 BLEURT @ git+https://github.com/google-research/bleurt.git@b610120347ef22b494b6d69b4316e303f5932516
+absl-py==0.13.0
+nltk==3.4.3
+rouge-score==0.0.4
+sacrebleu==1.5.1
