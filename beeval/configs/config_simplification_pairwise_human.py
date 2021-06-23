@@ -3,15 +3,16 @@ import pandas as pd
 import ast
 import copy
 from typing import List, Dict, Tuple
-
 from beeval.configs.config_base import ConfigBase
+from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class SimplificationPairwiseHuman(ConfigBase):
     def __init__(self):
 
         file_name = 'asset_pairwise_human_comparisons.csv'
         file_name_processed = 'processed.simplification.pairwise_human'
-        metric_names = None
+        metric_names = _DEFAULT_METRIC_NAMES
+        metric_names = metric_names + ('sari',)
 
         language = "en"
         task = "simplification"
@@ -101,28 +102,39 @@ class SimplificationPairwiseHuman(ConfigBase):
 
     def fill_rank(
         self,
-        d_data: Dict,
-        dim_1s: Tuple[str],
-        dim_2s: Tuple[str]
+        d_data: Dict[str, Dict],
+        ref_key: str,
+        dim_humans: Tuple[str],
+        dim_metrics: Tuple[str]
     ):
 
-        for ex_id, ex in d_data.items():
+        def get_rank(v1, v2):
+            if v1 > v2:
+                rank = 1
+            elif v2 == v2:
+                rank = 0.5
+            else:
+                rank = 0.0
+            return rank
+
+        copy_d_data = copy.deepcopy(d_data)
+
+        for ex_id, ex in copy_d_data.items():
             l, m1, m2, m_ex = ex_id.split('_')
             m_paired = m1 if m1 != m_ex else m2
             paired_key = f'{l}_{m1}_{m2}_{m_paired}'
-            copy_d_data = copy.deepcopy(d_data)
 
-            for metric in set(dim_1s + dim_2s):
-                if ex[metric] > copy_d_data[paired_key][metric]:
-                    rank = 1
-                elif ex[metric] == copy_d_data[paired_key][metric]:
-                    rank = 0.5
-                else:
-                    rank = 0.0
+            model_name = ex_id.split('.')[0].split('_')[1]
+            d_data[ex_id]['model_name'] = model_name
 
-                d_data[ex_id][metric] = rank
+            for dim_h in dim_humans:
+                v1 = ex[dim_m]
+                v2 = copy_d_data[paired_key][dim_m]
+                d_data[ex_id][dim_h] = get_rank(v1, v2)
 
-                model_name = ex_id.split('.')[0].split('_')[1]
-                d_data[ex_id]['model_name'] = model_name
+            for dim_m in dim_metrics:
+                v1 = ex[ref_key][dim_m]
+                v2 = copy_d_data[paired_key][ref_key][dim_m]
+                d_data[ex_id][ref_key][dim_h] = get_rank(v1, v2)
 
         return d_data

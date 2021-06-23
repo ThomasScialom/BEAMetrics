@@ -22,9 +22,7 @@ python beametrics/run_all.py
 The optional argument *--dataset* allows to compute only on a specific dataset, e.g. *SummarizationCNNDM*. The list of the datasets and their corresponding configuration can be found in *configs/\_\_init\_\_*.
 
 
-
 TODO: 
-- refactor output files 
 - mode per nb of ref
 - clean readme with install and a printable result 
 - allow to dynamically set new external metrics / remove one when running a config

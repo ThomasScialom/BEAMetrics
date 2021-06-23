@@ -3,15 +3,16 @@ import pandas as pd
 import ast
 import copy
 from typing import Tuple, Dict
-
 from beeval.configs.config_base import ConfigBase
+from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class SimplificationPairwiseSystem(ConfigBase):
     def __init__(self):
 
         file_name = 'access_pairwise_system_comparisons.csv'
         file_name_processed = 'processed.simplification.pairwise_system'
-        metric_names = None
+        metric_names = _DEFAULT_METRIC_NAMES
+        metric_names = metric_names + ('sari',)
 
         language = "en"
         task = "simplification"
@@ -101,17 +102,17 @@ class SimplificationPairwiseSystem(ConfigBase):
 
     def fill_rank(
         self,
-        d_data: Dict,
+        d_data: Dict[str, Dict],
+        ref_key: str,
         dim_1s: Tuple[str],
         dim_2s: Tuple[str]
     ):
-
         dim_1s = self.dimensions
-        for ex_id, ex in d_data.items():
+        copy_d_data = copy.deepcopy(d_data)
+        for ex_id, ex in copy_d_data.items():
             l, m1, m2, m_ex = ex_id.split('_')
             m_paired = m1 if m1 != m_ex else m2
             paired_key = f'{l}_{m1}_{m2}_{m_paired}'
-            copy_d_data = copy.deepcopy(d_data)
 
             for metric in set(dim_1s + dim_2s):
                 if ex[metric] > copy_d_data[paired_key][metric]:
@@ -121,9 +122,8 @@ class SimplificationPairwiseSystem(ConfigBase):
                 else:
                     rank = 0.0
 
-                d_data[ex_id][metric] = rank
-
                 model_name = ex_id.split('.')[0].split('_')[1]
                 d_data[ex_id]['model_name'] = model_name
+                d_data[ex_id][metric] = rank
 
         return d_data

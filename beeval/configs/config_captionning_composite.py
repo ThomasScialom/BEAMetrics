@@ -1,13 +1,14 @@
-from beeval.configs.config_base import ConfigBase
 import pickle
+from beeval.configs.config_base import ConfigBase
+from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+
 
 class CaptioningComposite(ConfigBase):
     def __init__(self):
 
         file_name = 'captioning_human_judgments.pkl'
         file_name_processed = 'processed.captioning.composite'
-        metric_names = None
-
+        metric_names = _DEFAULT_METRIC_NAMES
         language = "en"
         task = "captioning"
         nb_refs = 5

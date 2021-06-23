@@ -21,7 +21,6 @@ class MetricBase():
     ) -> Dict[str, List[float]]:
         raise NotImplemented
 
-
 class MetricBaseHF(MetricBase):
     def __init__(self):
         """
@@ -239,12 +238,15 @@ class MetricBleurtScore(MetricBaseHFRef):
     ) -> Dict[str, list]:
         return {'bleurt': final_scores['scores']}
 
-
 class MetricQuestEval():
 
-    def __init__(self):
+    def __init__(
+        self,
+        lang: str,
+        task: str
+    ):
         self.metric_name = 'questeval'
-        self.metric = QuestEval()
+        self.metric = QuestEval(language=lang, task=task)
 
     def pipeline(
             self,

@@ -1,14 +1,16 @@
-from beeval.configs.config_base import ConfigBase
 import numpy as np
 import pandas as pd
 import ast
+from beeval.configs.config_base import ConfigBase
+from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class SimplificationLikertSystem(ConfigBase):
     def __init__(self):
 
         file_name = 'simplification_absolute_ratings.csv'
         file_name_processed = 'processed.simplification.likert_system'
-        metric_names = None
+        metric_names = _DEFAULT_METRIC_NAMES
+        metric_names = metric_names + ('sari',)
 
         language = "en"
         task = "simplification"

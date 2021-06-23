@@ -1,13 +1,14 @@
-from beeval.configs.config_base import ConfigBase
 import numpy as np
 import json
+from beeval.configs.config_base import ConfigBase
+from beeval.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class SummarizationCNNDM(ConfigBase):
     def __init__(self):
 
         file_name = 'summeval.model_annotations.aligned.paired.jsonl'
         file_name_processed = 'processed.summarization.cnndm'
-        metric_names = None
+        metric_names = _DEFAULT_METRIC_NAMES
 
         language = "en"
         task = "summarization"
