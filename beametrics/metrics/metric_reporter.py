@@ -1,19 +1,14 @@
 from typing import List, Dict, Tuple, Any
 from beametrics.utils import component_logger
+from beametrics.metrics.metrics import (MetricBaseHFRef, MetricBaseHFSrcRef)
+from beametrics.metrics import _D_METRICS
 
-from beametrics.metrics.metrics import (
-    MetricBaseHFSrcRef,
-    MetricBaseHFRef,
-    MetricSacreBleu,
-    MetricSari,
-    MetricMeteor,
-    MetricRouge,
-    MetricBertscore,
-    MetricBleurtScore,
-    MetricQuestEval,
+_DEFAULT_METRIC_NAMES = (
+    'rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt',
 )
+_DEFAULT_METRIC_NAMES_SRC = _DEFAULT_METRIC_NAMES + ('questeval_t2t_src', )
+#_DEFAULT_METRIC_NAMES_SRC = (questeval_t2t_src_f1_answ, 'questeval_t2t_src', 'questeval_src_weighter')
 
-_DEFAULT_METRIC_NAMES = ('rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt', 'questeval')
 
 class MetricReporter():
     """
@@ -47,22 +42,11 @@ class MetricReporter():
         metric_name: str
     ):
         assert self.d_metrics[metric_name] is None
-
         component_logger.info(f"Loading {metric_name}")
-        if metric_name == 'sari':
-            self.d_metrics[metric_name] = MetricSari()
-        if metric_name == 'sacrebleu':
-            self.d_metrics[metric_name] = MetricSacreBleu()
-        if metric_name == 'meteor':
-            self.d_metrics[metric_name] = MetricMeteor()
-        if metric_name == 'rouge':
-            self.d_metrics[metric_name] = MetricRouge()
-        if metric_name == 'bertscore':
-            self.d_metrics[metric_name] = MetricBertscore()
-        if metric_name == 'bleurt':
-            self.d_metrics[metric_name] = MetricBleurtScore()
-        if metric_name == 'questeval':
-            self.d_metrics[metric_name] = MetricQuestEval(task=self.task, lang=self.lang)
+        self.d_metrics[metric_name] = _D_METRICS[metric_name](
+            task=self.task,
+            lang=self.lang
+        )
 
     def get_sub_metric_names(
         self,

@@ -11,7 +11,7 @@ class MetricBase():
     with the scores name as keys and the list of corresponding scores as values.
     """
     def __init__(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     def pipeline(
             self,
@@ -19,15 +19,19 @@ class MetricBase():
             sources: List[str] = None,
             list_references: List[List[str]] = None,
     ) -> Dict[str, List[float]]:
-        raise NotImplemented
+        raise NotImplementedError
+
+    @classmethod
+    def metric_name(cls):
+        return cls.__name__
 
 class MetricBaseHF(MetricBase):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Metric Class that have a pipeline implemented
         for any metrics from the Hugging Face library.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def pipeline(
         self,
@@ -102,14 +106,14 @@ class MetricBaseHF(MetricBase):
         sources: List[str] = None,
         references: List = None,
     ):
-        assert isinstance(NotImplemented, object)
-        raise NotImplemented
+        assert isinstance(NotImplementedError, object)
+        raise NotImplementedError
 
     def get_format(
         self,
         final_scores: Dict
     ) -> Dict[str, list]:
-        raise NotImplemented
+        raise NotImplementedError
 
 class MetricBaseHFSrcRef(MetricBaseHF):
     def compute(
@@ -141,12 +145,15 @@ class MetricBaseHFRef(MetricBaseHF):
 
 class MetricSari(MetricBaseHFSrcRef):
 
-    def __init__(self):
-        self.metric_name = 'sari'
-        self.metric = load_metric(self.metric_name)
+    def __init__(self, *args, **kwargs):
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = True
         self.dict_kwargs = dict()
         self.emulate_multirefs = False
+
+    @classmethod
+    def metric_name(cls):
+        return 'sari'
 
     def get_format(
         self,
@@ -158,12 +165,15 @@ class MetricSari(MetricBaseHFSrcRef):
 
 class MetricMeteor(MetricBaseHFRef):
 
-    def __init__(self):
-        self.metric_name = 'meteor'
-        self.metric = load_metric(self.metric_name)
+    def __init__(self, *args, **kwargs):
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = True
         self.dict_kwargs = dict()
         self.emulate_multirefs = True
+
+    @classmethod
+    def metric_name(cls):
+        return 'meteor'
 
     def get_format(
             self,
@@ -175,12 +185,15 @@ class MetricMeteor(MetricBaseHFRef):
 
 class MetricRouge(MetricBaseHFRef):
 
-    def __init__(self):
-        self.metric_name = 'rouge'
-        self.metric = load_metric(self.metric_name)
+    def __init__(self, *args, **kwargs):
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = False
         self.dict_kwargs = {'use_agregator': False}
         self.emulate_multirefs = True
+
+    @classmethod
+    def metric_name(cls):
+        return 'rouge'
 
     def get_format(
             self,
@@ -192,12 +205,15 @@ class MetricRouge(MetricBaseHFRef):
 
 class MetricSacreBleu(MetricBaseHFRef):
 
-    def __init__(self):
-        self.metric_name = 'sacrebleu'
-        self.metric = load_metric(self.metric_name)
+    def __init__(self, *args, **kwargs):
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = True
         self.dict_kwargs = dict()
         self.emulate_multirefs = False
+
+    @classmethod
+    def metric_name(cls):
+        return 'sacrebleu'
 
     def get_format(
             self,
@@ -209,13 +225,18 @@ class MetricBertscore(MetricBaseHFRef):
 
     def __init__(
         self,
-        device: str = 'cuda'
+        device: str = 'cuda',
+        *args,
+        **kwargs
     ):
-        self.metric_name = 'bertscore'
-        self.metric = load_metric(self.metric_name)
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = False
         self.dict_kwargs = {'model_type': 'bert-base-multilingual-cased', 'device': device}
         self.emulate_multirefs = False
+
+    @classmethod
+    def metric_name(cls):
+        return 'bertscore'
 
     def get_format(
             self,
@@ -225,12 +246,15 @@ class MetricBertscore(MetricBaseHFRef):
 
 class MetricBleurtScore(MetricBaseHFRef):
 
-    def __init__(self):
-        self.metric_name = 'bleurt'
-        self.metric = load_metric(self.metric_name)
+    def __init__(self, *args, **kwargs):
+        self.metric = load_metric(self.metric_name())
         self.do_seg_level = False
         self.dict_kwargs = {}
         self.emulate_multirefs = True
+
+    @classmethod
+    def metric_name(cls):
+        return 'bleurt'
 
     def get_format(
             self,
@@ -238,15 +262,19 @@ class MetricBleurtScore(MetricBaseHFRef):
     ) -> Dict[str, list]:
         return {'bleurt': final_scores['scores']}
 
-class MetricQuestEval():
+class MetricQuestEval(MetricBase):
 
     def __init__(
         self,
         lang: str,
-        task: str
+        task: str,
+        *args, **kwargs
     ):
-        self.metric_name = 'questeval'
         self.metric = QuestEval(language=lang, task=task)
+
+    @classmethod
+    def metric_name(cls):
+        return 'questeval'
 
     def pipeline(
             self,
@@ -260,4 +288,38 @@ class MetricQuestEval():
                 list_references = list_references
         )
 
-        return {self.metric_name: res['ex_level_scores']}
+        return {self.metric_name(): res['ex_level_scores']}
+
+class MetricQuestEval_t2t(MetricQuestEval):
+
+    def __init__(
+        self,
+        lang: str,
+        task: str
+    ):
+        task = 'text2text' if task is not 'data2text' else task
+        self.metric = QuestEval(task=task, language=lang)
+
+    @classmethod
+    def metric_name(cls):
+        return 'questeval_t2t'
+
+class MetricQuestEval_t2t_src(MetricQuestEval_t2t):
+
+    @classmethod
+    def metric_name(cls):
+        return 'questeval_t2t_src'
+
+    def pipeline(
+            self,
+            predictions: List[str] = None,
+            sources: List[str] = None,
+            list_references: List[List[str]] = None,
+    ) -> Dict:
+        res = self.metric.corpus_questeval(
+                hypothesis = predictions,
+                sources = sources,
+                list_references = None
+        )
+
+        return {self.metric_name(): res['ex_level_scores']}

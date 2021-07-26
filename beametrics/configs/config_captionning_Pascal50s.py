@@ -15,9 +15,10 @@ class CaptioningPascal50s(ConfigBase):
 
         dimensions = ('score', )
 
-        dimensions_definitions = {'score': "triplet (A,B,C), where A is composed of 50 reference captions, "
-                                           "B and C are two candidate captions. Annotators were asked to chose between B and C "
-                                           "the more appropriate caption for the corresponding given image compared to A",
+        dimensions_definitions = {
+            'score': "triplet (A,B,C), where A is an image composed of 50 reference captions, "
+            "B and C are two candidate captions. Annotators were asked to chose between B and C "
+            "the more appropriate caption for the corresponding given image A",
         }
 
         scale = "pairwise"

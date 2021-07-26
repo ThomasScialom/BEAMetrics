@@ -4,14 +4,14 @@ import ast
 import copy
 from typing import Tuple, Dict
 from beametrics.configs.config_base import ConfigBase
-from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES_SRC
 
 class SimplificationPairwiseSystem(ConfigBase):
     def __init__(self):
 
         file_name = 'access_pairwise_system_comparisons.csv'
         file_name_processed = 'processed.simplification.pairwise_system'
-        metric_names = _DEFAULT_METRIC_NAMES
+        metric_names = _DEFAULT_METRIC_NAMES_SRC
         metric_names = metric_names + ('sari',)
 
         language = "en"

@@ -1,6 +1,6 @@
-"""import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
-"""
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 
 from beametrics.utils import component_logger
 
@@ -23,10 +23,10 @@ def main():
                         help=f"The path where the dataset file is stored. "
                              f"By default BEEval/data.")
 
-    parser.add_argument('--use_cache',
-                        default=True,
+    parser.add_argument('--reload_cache',
+                        default=False,
                         type=bool,
-                        help=f"If False the processed files will be overwritten.")
+                        help=f"If True the processed files will be overwritten.")
 
     args = parser.parse_args()
 
@@ -41,7 +41,7 @@ def main():
         config = D_ALL_DATASETS[config_name]()
         config.pipeline(
             path_data=args.path_data,
-            use_cache=args.use_cache
+            reload_cache=args.reload_cache
         )
 
 if __name__ == "__main__":

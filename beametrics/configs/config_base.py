@@ -2,6 +2,7 @@ from typing import List, Tuple, Dict, Callable, Any
 import os
 import json
 from scipy.stats import pearsonr
+import pprint
 
 from beametrics.metrics.metric_reporter import MetricReporter
 from beametrics.utils import component_logger
@@ -108,7 +109,7 @@ class ConfigBase:
         Usage: a formating function that corresponds to the specific dataset.
         :return: d_data, a unified format among all the datasets
         """
-        raise(NotImplemented)
+        raise NotImplementedError
 
     def fill_rank(self, *args, **kwargs):
         """
@@ -120,7 +121,7 @@ class ConfigBase:
     def pipeline(
         self,
         path_data: str ='data',
-        use_cache: bool =True,
+        reload_cache: bool = False,
         correl_function: Callable = pearsonr
     ):
         """
@@ -132,15 +133,15 @@ class ConfigBase:
         Arguments:
             path_data (str):
                 The path of the raw evaluation dataset.
-            use_cache (bool):
-                If True will use the stored results for the metrics already computed.
+            reload_cache (bool):
+                If False will use the stored results for the metrics already computed.
         """
 
         path_raw_data = os.path.join(path_data, 'raw', self.file_name)
         assert os.path.exists(path_raw_data), f"Path {path_raw_data} does not exist."
 
         path_processed_data = os.path.join(path_data, 'processed', self.file_name_processed)
-        if not use_cache or not os.path.exists(path_processed_data):
+        if reload_cache or not os.path.exists(path_processed_data):
             # Load the raw data
             d_data = self.format_file(path_raw_data)
         else:
@@ -268,7 +269,7 @@ class ConfigBase:
         path_correlations = os.path.join(path_data, 'correlation', self.file_name_processed)
         with open(path_correlations, "w") as f_w:
             json.dump(d_correlations, f_w, indent=2)
-        component_logger.info(d_correlations)
+        component_logger.info(d_correlations) #pprint.pprint
 
     def compute_correl(
         self,

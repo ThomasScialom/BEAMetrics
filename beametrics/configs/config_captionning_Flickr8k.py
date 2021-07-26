@@ -14,10 +14,12 @@ class CaptioningFlickr8k(ConfigBase):
 
         dimensions = ('score', )
 
-        dimensions_definitions = {'score': "A score of 4 means that the caption describes the image perfectly (without any mistakes), "
-                                                "a score of 3 that the caption almost describes the image (minor mistakes are allowed, e.g. in the number of entities), "
-                                                "whereas a score of 2 indicates that the caption only describes some aspects of the image, but could not be used as its description, "
-                                                "and a score of 1 indicates that the caption bears no relation to the image."}
+        dimensions_definitions = {
+            'score': "A score of 4 means that the caption describes the image perfectly (without any mistakes), "
+            "a score of 3 that the caption almost describes the image (minor mistakes are allowed, e.g. in the number of entities), "
+            "whereas a score of 2 indicates that the caption only describes some aspects of the image, but could not be used as its description, "
+            "and a score of 1 indicates that the caption bears no relation to the image."
+        }
 
         scale = "likert"
 

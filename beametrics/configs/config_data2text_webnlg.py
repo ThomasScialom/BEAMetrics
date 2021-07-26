@@ -1,13 +1,13 @@
 import json
 from beametrics.configs.config_base import ConfigBase
-from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES_SRC
 
 class Data2textWebNLG(ConfigBase):
     def __init__(self):
 
         file_name = 'webnlg-data.json'
         file_name_processed = 'processed.data2text.webnlg'
-        metric_names = _DEFAULT_METRIC_NAMES
+        metric_names = _DEFAULT_METRIC_NAMES_SRC
 
         language = "en"
         task = "data2text"
@@ -15,9 +15,10 @@ class Data2textWebNLG(ConfigBase):
 
         dimensions = ('fluency', 'grammar', 'semantics')
 
-        dimensions_definitions = {'fluency': "Does the text sound fluent and natural?",
-                                       'grammar': "Is the text grammatical?",
-                                       'semantics': "Does the text correctly represent the meaning in the data?"
+        dimensions_definitions = {
+            'fluency': "Does the text sound fluent and natural?",
+            'grammar': "Is the text grammatical?",
+            'semantics': "Does the text correctly represent the meaning in the data?"
         }
 
         scale = "likert"

@@ -9,13 +9,14 @@ from beametrics.configs.config_simplification_pairwise_system import Simplificat
 from beametrics.configs.config_summarization_cnndm import SummarizationCNNDM
 
 D_ALL_DATASETS = {
-    'SimplificationLikertHuman': SimplificationLikertHuman,
+    #'SimplificationLikertHuman': SimplificationLikertHuman,
     'SimplificationLikertSystem': SimplificationLikertSystem,
-    'SimplificationPairwiseHuman': SimplificationPairwiseHuman,
-    'SimplificationPairwiseSystem': SimplificationPairwiseSystem,
+    #'SimplificationPairwiseHuman': SimplificationPairwiseHuman,
+    #'SimplificationPairwiseSystem': SimplificationPairwiseSystem,
+    'SummarizationCNNDM': SummarizationCNNDM,
     'Data2textWebNLG': Data2textWebNLG,
     'CaptioningFlickr8k': CaptioningFlickr8k,
     'CaptioningPascal50s': CaptioningPascal50s,
-    'CaptioningComposite': CaptioningComposite,
-    'SummarizationCNNDM': SummarizationCNNDM
+    #'CaptioningComposite': CaptioningComposite,
+
 }
