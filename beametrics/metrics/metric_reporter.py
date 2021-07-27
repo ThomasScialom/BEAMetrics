@@ -6,8 +6,7 @@ from beametrics.metrics import _D_METRICS
 _DEFAULT_METRIC_NAMES = (
     'rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt',
 )
-_DEFAULT_METRIC_NAMES_SRC = _DEFAULT_METRIC_NAMES + ('questeval_t2t_src', )
-#_DEFAULT_METRIC_NAMES_SRC = (questeval_t2t_src_f1_answ, 'questeval_t2t_src', 'questeval_src_weighter')
+_DEFAULT_METRIC_NAMES_SRC = _DEFAULT_METRIC_NAMES
 
 
 class MetricReporter():

@@ -18,5 +18,4 @@ D_ALL_DATASETS = {
     'CaptioningFlickr8k': CaptioningFlickr8k,
     'CaptioningPascal50s': CaptioningPascal50s,
     #'CaptioningComposite': CaptioningComposite,
-
 }

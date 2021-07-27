@@ -9,7 +9,7 @@ class SummarizationCNNDM(ConfigBase):
         file_name = 'summeval.model_annotations.aligned.paired.jsonl'
         file_name_processed = 'processed.summarization.cnndm'
         metric_names = _DEFAULT_METRIC_NAMES_SRC
-        metric_names = metric_names + ('questeval_src_weighter',)
+        metric_names = metric_names # todo questeval: + ('questeval_src_weighter',)
 
         language = "en"
         task = "summarization"

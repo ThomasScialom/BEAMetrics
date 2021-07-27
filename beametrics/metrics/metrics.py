@@ -1,6 +1,3 @@
-# todo: from easse.fkgl import corpus_fkgl
-from questeval.questeval_metric import QuestEval
-
 from typing import List, Dict
 import numpy as np
 from datasets import load_metric
@@ -19,6 +16,20 @@ class MetricBase():
             sources: List[str] = None,
             list_references: List[List[str]] = None,
     ) -> Dict[str, List[float]]:
+        """
+        pipeline takes as input a list of predictions, sources, list_references,
+        where len(predictions) corresponds to the number of examples,
+        and len(list_references[0]) corresponds to the number of references per example.
+
+        The method has to return a dictionary:
+            {
+                name_metric_1: [score_metric_1_ex_1, score_metric_1_ex_n],
+                name_metric_2: [score_metric_1_ex_1, score_metric_1_ex_n],
+                ...
+            }
+        where name_metric_1 and name_metric_2 are different output of the computed metric (e.g. ROUGE-1, ROUGE-2, ROUGE-L),
+        and their values are a list of corresponding scores for each example from 1 to n with n = len(predictions).
+        """
         raise NotImplementedError
 
     @classmethod
@@ -262,64 +273,5 @@ class MetricBleurtScore(MetricBaseHFRef):
     ) -> Dict[str, list]:
         return {'bleurt': final_scores['scores']}
 
-class MetricQuestEval(MetricBase):
 
-    def __init__(
-        self,
-        lang: str,
-        task: str,
-        *args, **kwargs
-    ):
-        self.metric = QuestEval(language=lang, task=task)
 
-    @classmethod
-    def metric_name(cls):
-        return 'questeval'
-
-    def pipeline(
-            self,
-            predictions: List[str] = None,
-            sources: List[str] = None,
-            list_references: List[List[str]] = None,
-    ) -> Dict:
-        res = self.metric.corpus_questeval(
-                hypothesis = predictions,
-                sources = sources,
-                list_references = list_references
-        )
-
-        return {self.metric_name(): res['ex_level_scores']}
-
-class MetricQuestEval_t2t(MetricQuestEval):
-
-    def __init__(
-        self,
-        lang: str,
-        task: str
-    ):
-        task = 'text2text' if task is not 'data2text' else task
-        self.metric = QuestEval(task=task, language=lang)
-
-    @classmethod
-    def metric_name(cls):
-        return 'questeval_t2t'
-
-class MetricQuestEval_t2t_src(MetricQuestEval_t2t):
-
-    @classmethod
-    def metric_name(cls):
-        return 'questeval_t2t_src'
-
-    def pipeline(
-            self,
-            predictions: List[str] = None,
-            sources: List[str] = None,
-            list_references: List[List[str]] = None,
-    ) -> Dict:
-        res = self.metric.corpus_questeval(
-                hypothesis = predictions,
-                sources = sources,
-                list_references = None
-        )
-
-        return {self.metric_name(): res['ex_level_scores']}
