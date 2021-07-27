@@ -30,7 +30,11 @@ python beametrics/run_all.py
 ```
 
 When finished, you can print the final table as in the paper: 
-# todo
+
+```
+from beametrics.utils import print_final_tables
+print_final_tables()
+```
  
 The optional argument `--dataset` allows to compute only on a specific dataset, e.g.:
 
