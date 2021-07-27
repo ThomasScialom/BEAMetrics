@@ -1,15 +1,14 @@
 import numpy as np
 import json
 from beametrics.configs.config_base import ConfigBase
-from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES_SRC
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES, _DEFAULT_METRIC_NAMES_SRC
 
 class SummarizationCNNDM(ConfigBase):
     def __init__(self):
 
         file_name = 'summeval.model_annotations.aligned.paired.jsonl'
         file_name_processed = 'processed.summarization.cnndm'
-        metric_names = _DEFAULT_METRIC_NAMES_SRC
-        metric_names = metric_names # todo questeval: + ('questeval_src_weighter',)
+        metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC
 
         language = "en"
         task = "summarization"

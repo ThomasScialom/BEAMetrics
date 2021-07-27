@@ -76,4 +76,12 @@ Finally, you need to add your dataset to the dictionary `D_ALL_DATASETS` located
 
 ## Adding a new metric:
 
-First, create a class inheriting from `metrics/metrics/MetricBase`.
+First, create a class inheriting from `metrics/metrics/MetricBase`. Then, simply add it to the dictionary `_D_METRICS` in `metrics/__init__`.
+
+For the metric to be computed by default, its name has to be added to either
+- `_DEFAULT_METRIC_NAMES`: metrics computed on each dataset
+- `_DEFAULT_METRIC_NAMES_SRC`: metrics computed on dataset that have a text format for their source (are excluded for now image captioning and data2text).
+These two tuples are located in `metrics/metric_reported`. 
+
+Alternatively, you can add the metric to a specific configuration by adding it to the attribute `metric_names` in the config.
+

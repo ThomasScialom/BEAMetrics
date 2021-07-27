@@ -1,13 +1,13 @@
 import json
 from beametrics.configs.config_base import ConfigBase
-from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES_SRC
+from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES
 
 class Data2textWebNLG(ConfigBase):
     def __init__(self):
 
         file_name = 'webnlg-data.json'
         file_name_processed = 'processed.data2text.webnlg'
-        metric_names = _DEFAULT_METRIC_NAMES_SRC
+        metric_names = _DEFAULT_METRIC_NAMES
 
         language = "en"
         task = "data2text"

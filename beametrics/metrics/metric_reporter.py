@@ -6,7 +6,7 @@ from beametrics.metrics import _D_METRICS
 _DEFAULT_METRIC_NAMES = (
     'rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt',
 )
-_DEFAULT_METRIC_NAMES_SRC = _DEFAULT_METRIC_NAMES
+_DEFAULT_METRIC_NAMES_SRC = ()
 
 
 class MetricReporter():
