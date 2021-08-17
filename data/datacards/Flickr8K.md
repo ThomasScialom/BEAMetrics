@@ -1,6 +1,6 @@
 # Table card: Flickr8K (Fli)
 
-This table card grasp all the information for Flickr8K. The specific definition of each field is available at this [link]().
+This table card grasp all the information for Flickr8K. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
 
 **Task:** 
 `captioning`
@@ -42,13 +42,12 @@ This table card grasp all the information for Flickr8K. The specific definition 
 
 **Citation:** 
 ```
-
-                        @article{hodosh2013framing,
-                        title={Framing image description as a ranking task: Data, models and evaluation metrics},
-                        author={Hodosh, Micah and Young, Peter and Hockenmaier, Julia},
-                        journal={Journal of Artificial Intelligence Research},
-                        volume={47},
-                        pages={853--899},
-                        year={2013}}
-                        
+@article{hodosh2013framing,
+        title={Framing image description as a ranking task: Data, models and evaluation metrics},
+        author={Hodosh, Micah and Young, Peter and Hockenmaier, Julia},
+        journal={Journal of Artificial Intelligence Research},
+        volume={47},
+        pages={853--899},
+        year={2013}
+}
 ```

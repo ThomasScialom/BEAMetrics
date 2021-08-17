@@ -42,6 +42,8 @@ The optional argument `--dataset` allows to compute only on a specific dataset, 
  
 The list of the datasets and their corresponding configuration can be found in `configs/__init__`.
 
+For each dataset, a data card is available in the [datacard folder](https://github.com/ThomasScialom/BEAMetrics/tree/main/data/datacards)
+
 ## Adding a new dataset:
 
 In `configs/`, you need to create a new `.py` file that inherites from `ConfigBase` (in `configs/co'nfig_base.py`). 

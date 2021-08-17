@@ -1,6 +1,6 @@
 # Table card: RealSum (Rea)
 
-This table card grasp all the information for RealSum. The specific definition of each field is available at this [link]().
+This table card grasp all the information for RealSum. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
 
 **Task:** 
 `Summarization`

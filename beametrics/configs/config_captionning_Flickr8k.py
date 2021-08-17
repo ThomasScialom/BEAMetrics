@@ -26,15 +26,14 @@ class CaptioningFlickr8k(ConfigBase):
         source_eval_sets = "Flickr8k"
         annotators = "The judges were 21 adult native speakers of American English, mostly recruited from among the local graduate student population."
         sampled_from = "jair.org/index.php/jair/article/view/10833/25854"
-        citation = """
-                        @article{hodosh2013framing,
-                        title={Framing image description as a ranking task: Data, models and evaluation metrics},
-                        author={Hodosh, Micah and Young, Peter and Hockenmaier, Julia},
-                        journal={Journal of Artificial Intelligence Research},
-                        volume={47},
-                        pages={853--899},
-                        year={2013}}
-                        """
+        citation = """@article{hodosh2013framing,
+        title={Framing image description as a ranking task: Data, models and evaluation metrics},
+        author={Hodosh, Micah and Young, Peter and Hockenmaier, Julia},
+        journal={Journal of Artificial Intelligence Research},
+        volume={47},
+        pages={853--899},
+        year={2013}
+}"""
         additional_comments = """
         - The evaluation procedure is detailed Page 19 in https://www.jair.org/index.php/jair/article/view/10833/25854, in Section 4. Evaluation Procedures and Metrics for Image Description." 
         - Likert scale 1-4. The judges were experts: 21 adult native speakers of American English, mostly recruited from among the local graduate student population. 

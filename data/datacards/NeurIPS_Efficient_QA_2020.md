@@ -1,6 +1,6 @@
 # Table card: NeurIPS_Efficient_QA_2020 (QA)
 
-This table card grasp all the information for NeurIPS_Efficient_QA_2020. The specific definition of each field is available at this [link]().
+This table card grasp all the information for NeurIPS_Efficient_QA_2020. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
 
 **Task:** 
 `QA`
