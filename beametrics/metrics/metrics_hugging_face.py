@@ -1,5 +1,7 @@
 from typing import List, Dict
 import numpy as np
+from tqdm import tqdm
+
 from datasets import load_metric
 
 from beametrics.metrics.metrics import MetricBase
@@ -232,11 +234,17 @@ class MetricBertscore(MetricBaseHFRef):
     def metric_name(cls):
         return 'bertscore'
 
+    def sub_metric_names(self):
+        return ['bertscore_f1', 'bertscore_precision', 'bertscore_recall']
+
     def get_format(
             self,
             final_scores: Dict
     ) -> Dict[str, list]:
-        return {self.metric_name(): final_scores['f1']}
+        return {
+            f'{self.metric_name()}_{mode}': final_scores[mode]
+            for mode in ['f1', 'precision', 'recall']
+        }
 
 class MetricBleurtScore(MetricBaseHFRef):
 

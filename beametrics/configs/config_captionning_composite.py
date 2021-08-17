@@ -9,19 +9,20 @@ class CaptioningComposite(ConfigBase):
         file_name = 'captioning_human_judgments.pkl'
         file_name_processed = 'processed.captioning.composite'
         metric_names = _DEFAULT_METRIC_NAMES
-        language = "en"
+
+        name_dataset = 'Composite'
+        short_name_dataset = 'Com'
+        languages = ["en"]
         task = "captioning"
+        number_examples = -1
         nb_refs = 5
-
-        dimensions = ('score', )
-
         dimensions_definitions = {'score': "relevance between each candidate caption-image pair with 5 reference captions",
         }
-
         scale = "likert"
-
+        source_eval_sets = ""
+        annotators = ""
+        additional_comments = "The likert scale is 1 to 5."
         sampled_from = "https://imagesdg.wordpress.com/image-to-scene-description-graph/"
-
         citation = """
                         @article{aditya2015images,
                         title={From images to sentences through scene description graphs using commonsense reasoning and knowledge},
@@ -30,19 +31,21 @@ class CaptioningComposite(ConfigBase):
                         year={2015}}
                         """
 
-        additional_comments = "The likert scale is 1 to 5."
-
         super().__init__(
             file_name=file_name,
             file_name_processed=file_name_processed,
             metric_names=metric_names,
-            language=language,
+            name_dataset=name_dataset,
+            short_name_dataset=short_name_dataset,
+            languages=languages,
             task=task,
             nb_refs=nb_refs,
-            dimensions=dimensions,
+            number_examples=number_examples,
             dimensions_definitions=dimensions_definitions,
             scale=scale,
             sampled_from=sampled_from,
+            source_eval_sets=source_eval_sets,
+            annotators=annotators,
             citation=citation,
             additional_comments=additional_comments
         )

@@ -8,49 +8,50 @@ class SummarizationCNNDM(ConfigBase):
 
         file_name = 'summeval.model_annotations.aligned.paired.jsonl'
         file_name_processed = 'processed.summarization.cnndm'
-        metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC
+        metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC + ('questeval_masked', )
 
-        language = "en"
+        name_dataset = 'SummmEval'
+        short_name_dataset = 'Sum'
+        languages = ["en"]
         task = "summarization"
+        number_examples = 1600
         nb_refs = 11
-
-        dimensions = ('coherence', 'consistency', 'fluency', 'relevance')
-
         dimensions_definitions = {
             'coherence': "‘the summary should be well-structured and well-organized. The summary should not just be a heap of related information, should build from sentence to sentence to a coherent body of information about a topic.",
             'consistency': "the factual alignment between the summary and the summarized source. A factually consistent summary contains only statements that are entailed by the source document. Annotators were also asked to penalize summaries that contained hallucinated facts.",
             'fluency': "the quality of individual sentences. Drawing again from the DUC quality guidelines, sentences in the summary ‘‘should have no formatting problems, capitalization errors or obviously ungrammatical sentences (e.g., fragments, missing components) that make the text difficult to read.’’",
             'relevance': "selection of important content from the source. The summary should include only important information from the source document. Annotators were instructed to penalize summaries that contained redundancies and excess information."
         }
-
         scale = "likert"
-
-        sampled_from = "https://arxiv.org/abs/2007.12626"
-
-        citation = """@article{fabbri2020summeval,
-                      title={SummEval: Re-evaluating Summarization Evaluation},
-                      author={Fabbri, Alexander R and Kry{\'s}ci{\'n}ski, Wojciech and McCann, Bryan and Xiong, Caiming and Socher, Richard and Radev, Dragomir},
-                      journal={arXiv preprint arXiv:2007.12626},
-                      year={2020}
-                    }
-        """
-
+        source_eval_sets = "CNN/DailyMail"
+        annotators = "Expert annotators (the original paper also contain non expert annotator ratings)"
         additional_comments = "- The authors release two set of annotations: " \
                               "from experts and turkers; we keep only the expert one." \
                               "- The present file is derived from the original one released by the authors," \
                               "it contains in addition a key 'text' that maps the example to the source article."
+        sampled_from = "https://arxiv.org/abs/2007.12626"
+        citation = """@article{fabbri2020summeval,
+        title={SummEval: Re-evaluating Summarization Evaluation},
+        author={Fabbri, Alexander R and Kry{\'s}ci{\'n}ski, Wojciech and McCann, Bryan and Xiong, Caiming and Socher, Richard and Radev, Dragomir},
+        journal={arXiv preprint arXiv:2007.12626},
+        year={2020}
+}"""
 
         super().__init__(
             file_name=file_name,
             file_name_processed=file_name_processed,
             metric_names=metric_names,
-            language=language,
+            name_dataset=name_dataset,
+            short_name_dataset=short_name_dataset,
+            languages=languages,
             task=task,
             nb_refs=nb_refs,
-            dimensions=dimensions,
+            number_examples=number_examples,
             dimensions_definitions=dimensions_definitions,
             scale=scale,
             sampled_from=sampled_from,
+            source_eval_sets=source_eval_sets,
+            annotators=annotators,
             citation=citation,
             additional_comments=additional_comments
         )

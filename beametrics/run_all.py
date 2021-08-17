@@ -39,11 +39,14 @@ def main():
         component_logger.info(f'________________________________________________\n'
                               f'Config {config_name} loaded. Computing the pipeline.')
         config = D_ALL_DATASETS[config_name]()
+        config.generate_data_card()
+
+        """
         config.pipeline(
             path_data=args.path_data,
             reload_cache=args.reload_cache
         )
-
+        """
 
 if __name__ == "__main__":
     main()

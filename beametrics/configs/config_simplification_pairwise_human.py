@@ -16,10 +16,8 @@ class SimplificationPairwiseHuman(ConfigBase):
 
         language = "en"
         task = "simplification"
+        number_examples = -1
         nb_refs = 10
-
-        dimensions = ('simplicity', 'meaning', 'fluency')
-
         dimensions_definitions = {
             'simplicity': "to what extent is the evaluated text easier to read and understand?",
             'meaning': "how well the evaluated text expresses the original meaning?",
@@ -27,16 +25,16 @@ class SimplificationPairwiseHuman(ConfigBase):
             }
 
         scale = "pairwise"
-
+        source_eval_sets = "3 different dataset including ASSET"
+        annotators = "Mechanical Turkers"
+        additional_comments = "The evaluated texts are written by humans."
         sampled_from = "https://www.aclweb.org/anthology/2020.acl-main.424/"
-
         citation = """@inproceedings{alva2020asset, 
                             title={ASSET: A Dataset for Tuning and Evaluation of Sentence Simplification Models with Multiple Rewriting Transformations},
                             author={Alva-Manchego, Fernando and Martin, Louis and Bordes, Antoine and Scarton, Carolina and Sagot, Beno{\^\i}t and Specia, Lucia},
                             booktitle={ACL 2020-58th Annual Meeting of the Association for Computational Linguistics},
                             year={2020}}"""
 
-        additional_comments = "The evaluated texts are written by humans."
 
         super().__init__(
             file_name=file_name,

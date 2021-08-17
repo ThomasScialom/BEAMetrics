@@ -44,17 +44,23 @@ The list of the datasets and their corresponding configuration can be found in `
 
 ## Adding a new dataset:
 
-In `configs/`, you need to create a new `.py` file that inherites from `ConfigBase` (in `configs/config_base.py`). 
-You are expected to fill the mandatory fields at least:
-- file_name: the file name located in `data/raw`,
-- file_name_processed: the file name once processed and formated,
-- metric_names: you can pass _DEFAULT_METRIC_NAMES by default or customize it, e.g. `metric_names = metric_names + ('sari',)` where `sari` corresponds to a valid metric (see the next section),
-- language: the language of the dataset (e.g. ``'en'`, `'multi'`)
-- task: e.g. `'simplification'`, `'data2text`
-- nb_refs: the number of references available in the dataset
-- dimensions: the evaluated dimensions e.g. `('simplicity', 'meaning', 'fluency')`
-
-But more information is better, for instance the exact definition of the dimensions or the citation.  
+In `configs/`, you need to create a new `.py` file that inherites from `ConfigBase` (in `configs/co'nfig_base.py`). 
+You are expected to fill the mandatory fields that allow to run the code and fill the data card template:
+- `file_name`: the file name located in `data/raw`
+- `file_name_processed`: the file name once processed and formated
+- `metric_names`: you can pass _DEFAULT_METRIC_NAMES by default or customize it, e.g. `metric_names = metric_names + ('sari',)` where `sari` corresponds to a valid metric (see the next section)
+- `name_dataset`: the name of the dataset as it was published
+- `short_name_dataset`: few letters that will be used to name the dataset in the final table report
+- `languages`: the languages of the dataset (e.g. `[en]` or `[en, fr]`)
+- `task`: e.g. `'simplification'`, `'data2text`
+- `number_examples`: the total number of evaluated texts
+- `nb_refs`: the number of references available in the dataset
+- `dimensions_definitions`: the evaluated dimensions and their corresponding definition e.g. `{'fluency: 'How fluent is the text?'}`
+- `scale`: the scale used during the evaluation, as defined in the protocol
+- `source_eval_sets`: the dataset from which the source were collected to generate the evaluated examples
+- `annotators`: some information about who were the annotators
+- `sampled_from`: the URL where was released the evaluation dataset
+- `citation`: the citation of the paper where the dataset was released
 
 Your class needs its custom method `format_file`. The function takes as input the dataset's `file_name` and return a dictionary `d_data`.
 The format for `d_data` has to be the same for all the datasets:

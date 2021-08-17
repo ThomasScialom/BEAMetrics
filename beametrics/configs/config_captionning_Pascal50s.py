@@ -9,44 +9,47 @@ class CaptioningPascal50s(ConfigBase):
         file_name = 'captioning_human_judgments.pkl'
         file_name_processed = 'processed.captioning.pascal50s'
         metric_names = _DEFAULT_METRIC_NAMES
-        language = "en"
+
+        name_dataset = 'Pascal50s-Eval'
+        short_name_dataset = 'Pas'
+        languages = ["en"]
         task = "captioning"
+        number_examples = 4000
         nb_refs = 50
-
-        dimensions = ('score', )
-
         dimensions_definitions = {
             'score': "triplet (A,B,C), where A is an image composed of 50 reference captions, "
             "B and C are two candidate captions. Annotators were asked to chose between B and C "
             "the more appropriate caption for the corresponding given image A",
         }
-
         scale = "pairwise"
-
+        source_eval_sets = "UIUC PASCAL Sentence Dataset"
+        annotators = "AMT worker"
+        additional_comments = "N/A"
         sampled_from = "http://vrama91.github.io/cider/"
+        citation = """@inproceedings{vedantam2015cider,
+        title={Cider: Consensus-based image description evaluation},
+        author={Vedantam, Ramakrishna and Lawrence Zitnick, C and Parikh, Devi},
+        booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+        pages={4566--4575},
+        year={2015}
+}"""
 
-        citation = """
-                        @inproceedings{vedantam2015cider,
-                        title={Cider: Consensus-based image description evaluation},
-                        author={Vedantam, Ramakrishna and Lawrence Zitnick, C and Parikh, Devi},
-                        booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
-                        pages={4566--4575},
-                        year={2015}}
-                        """
-
-        additional_comments = ""
 
         super().__init__(
             file_name=file_name,
             file_name_processed=file_name_processed,
             metric_names=metric_names,
-            language=language,
+            name_dataset=name_dataset,
+            short_name_dataset=short_name_dataset,
+            languages=languages,
             task=task,
             nb_refs=nb_refs,
-            dimensions=dimensions,
+            number_examples=number_examples,
             dimensions_definitions=dimensions_definitions,
             scale=scale,
             sampled_from=sampled_from,
+            source_eval_sets=source_eval_sets,
+            annotators=annotators,
             citation=citation,
             additional_comments=additional_comments
         )

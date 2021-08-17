@@ -12,18 +12,17 @@ class SimplificationLikertHuman(ConfigBase):
         metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC
         metric_names = metric_names + ('sari', )
 
+        name_dataset = 'ASSET-Eval-human'
+        short_name_dataset = 'AssH'
         language = "en"
         task = "simplification"
+        number_examples = -1
         nb_refs = 10
-
-        dimensions = ('simplicity', 'meaning', 'fluency')
-
         dimensions_definitions = {
             'simplicity': "to what extent is the evaluated text easier to read and understand?",
             'meaning': "how well the evaluated text expresses the original meaning?",
             'fluency': "how fluent is the evaluated text?"
         }
-
         scale = "likert"
 
         sampled_from = "https://arxiv.org/pdf/2104.07560.pdf"

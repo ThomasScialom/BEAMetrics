@@ -16,6 +16,7 @@ class SimplificationPairwiseSystem(ConfigBase):
 
         language = "en"
         task = "simplification"
+        number_examples = -1
         nb_refs = 10
 
         dimensions = ('simplicity', 'meaning', 'fluency')

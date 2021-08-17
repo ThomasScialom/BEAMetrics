@@ -74,7 +74,10 @@ class MetricAbstractness(MetricBase):
                 for tok in pred_N_grams:
                     if tok not in src_N_grams:
                         ex_novel_grams += 1
-                novel_grams.append(ex_novel_grams/len(pred_N_grams))
+                novel_grams.append(
+                    ex_novel_grams
+                    /(len(pred_N_grams)+ 1e-5)
+                )
             res[f'{self.metric_name()}_{N}'] = novel_grams
 
         return res

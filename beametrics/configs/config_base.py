@@ -34,12 +34,16 @@ class ConfigBase:
         file_name: str,
         file_name_processed: str,
         metric_names: Tuple[str],
-        language: str,
+        name_dataset: str,
+        short_name_dataset: str,
+        languages: List,
         task: str,
         nb_refs: int,
-        dimensions: Tuple[str],
+        number_examples: int,
         dimensions_definitions: Dict[str, str],
         scale: str,
+        source_eval_sets: str,
+        annotators: str,
         sampled_from: str,
         citation: str,
         additional_comments: str = None,
@@ -54,23 +58,30 @@ class ConfigBase:
             metric_names (Tuple[str]):
                 The list of metrics to compute on this task. If not specified it will be computed
                 on the default ones.
-            language (str):
-                The language of the dataset (e.g. en, fr, zh).
+            name_dataset (str):
+                The name of the human evaluation dataset.
+            short_name_dataset (str):
+                The shorter name of the human evaluation dataset, as it will be printed in the final tables.
+            languages (list):
+                The languages of the dataset (e.g. en, fr, zh).
             task (str):
                 The task of the dataset (e.g. summarization, data2text).
             nb_refs (int):
-                The number of human references available in the dataset.
+                The number of human references available in the dataset per example.
+            number_examples (int):
+                The number of examples annotated in total.
             list_nb_ref (Tuple/List/Range):
                 The different number of references we want to compute the correlations.
                 If not specify, the pipeline will be computed on [1, self.nb_refs].
-            dimensions (Tuple[str]):
-                The evaluated dimensions during the human evaluation,
-                and on which the correlation is computed.
             dimensions_definitions (Dict[str,str]:
-                A dictionary where each dimension in self.dimensions is a key. The corresponding value
+                A dictionary where each evaluated dimension is a key. The corresponding value
                 is the definiton of the dimension according to the original paper.
             scale (str):
-
+                The scale used in the annotation protocol.
+            source_eval_sets (str):
+                The dataset used to produced the evaluated examples.
+            annotators (str):
+                Details about who were the annotators.
             sampled_from (str):
                 The URL of the dataset.
             citation (str):
@@ -81,22 +92,27 @@ class ConfigBase:
 
         self.file_name = file_name
         self.file_name_processed = file_name_processed
-        self.language = language
+
+        self.name_dataset= name_dataset
+        self.short_name_dataset = short_name_dataset
+        self.languages = languages
         self.task = task
         self.nb_refs = nb_refs
+        self.number_examples = number_examples
         self.list_nb_ref = list_nb_ref
-        self.dimensions = dimensions
         self.dimensions_definitions = dimensions_definitions
         self.scale = scale
+        self.source_eval_sets = source_eval_sets
+        self.annotators = annotators
+        self.additional_comments = additional_comments
         self.sampled_from = sampled_from
         self.citation = citation
-        self.additional_comments = additional_comments
 
         self.metric_names = metric_names
         self.metric_reporter = MetricReporter(
             metric_names=metric_names,
             task=self.task,
-            lang=self.language
+            lang=self.languages
         )
         if self.metric_names is None:
             self.metric_names = self.metric_reporter.metric_names
@@ -165,9 +181,12 @@ class ConfigBase:
                     metric_names=self.metric_names,
                 )
 
+            component_logger.info(
+                f"Data loaded for {self.name_dataset} (total examples: {len(d_data)}). \n"
+            )
             if len(to_do_metrics) > 0:
                 component_logger.info(
-                    f"Data loaded. Now computing the following metrics: \n"
+                    f"Now computing the following metrics: \n"
                     f"{' '.join(to_do_metrics)}."
                 )
                 d_res = self.get_missing_metrics(
@@ -240,7 +259,7 @@ class ConfigBase:
         path_data: str,
         ref_keys: List[str]
     ):
-        dim_humans = self.dimensions
+        dim_humans = tuple(self.dimensions_definitions.keys())
         dim_metrics = tuple(self.metric_reporter.get_sub_metric_names(self.metric_names))
 
         d_correlations = dict()
@@ -292,3 +311,28 @@ class ConfigBase:
                 d_pval[dim_h][dim_m] = format(p_value, ".3E")
 
         return d_scores, d_pval
+
+
+    def generate_data_card(self):
+
+        with open('data/datacards/empty_template_data_card.md', 'r') as f_r:
+            template = f_r.readlines()
+
+        template = ''.join(template)
+        template = template.replace('<name_dataset>', self.name_dataset)
+        template = template.replace('<short_name_dataset>', self.short_name_dataset)
+        template = template.replace('<task>', self.task)
+        template = template.replace('<source_eval_sets>', self.source_eval_sets)
+        template = template.replace('<lang>', " ".join(self.languages))
+        template = template.replace('<dimensions>', '\n'.join(f'- {k}: {v}' for k, v in self.dimensions_definitions.items()))
+        template = template.replace('<scale>', self.scale)
+        template = template.replace('<number_examples>', str(self.number_examples))
+        template = template.replace('<number_references>', str(self.nb_refs))
+        template = template.replace('<annotators>', self.annotators)
+        template = template.replace('<additional_information>', self.additional_comments)
+        template = template.replace('<url>', self.sampled_from)
+        template = template.replace('<citation>', self.citation)
+
+        with open(f'data/datacards/{self.name_dataset}.md', 'w') as f_w:
+            f_w.write(template)
+

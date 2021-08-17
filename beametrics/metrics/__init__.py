@@ -1,5 +1,7 @@
 from beametrics.metrics.metrics_hugging_face import *
 from beametrics.metrics.metrics_stats import *
+from beametrics.metrics.metrics_other import *
+from beametrics.metrics.metrics_questeval_masked import MetricQuestEvalMasked
 #from beametrics.metrics.metrics_questeval import *
 
 _D_METRICS = {
@@ -12,5 +14,9 @@ _D_METRICS = {
     MetricSari.metric_name(): MetricSari,
     MetricBertscore.metric_name(): MetricBertscore,
     MetricBleurtScore.metric_name(): MetricBleurtScore,
-    #MetricQuestEval.metric_name(): MetricQuestEval,
+    MetricQuestEvalMasked.metric_name(): MetricQuestEvalMasked,
+    MetricNubia.metric_name(): MetricNubia,
+    MetricPerplexity.metric_name(): MetricPerplexity,
+    # MetricQuestEval.metric_name(): MetricQuestEval,
+
 }

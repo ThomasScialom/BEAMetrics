@@ -3,7 +3,7 @@ from beametrics.utils import component_logger
 from beametrics.metrics import _D_METRICS
 
 _DEFAULT_METRIC_NAMES = (
-    'length', 'repetition', 'rouge', 'sacrebleu', 'meteor', 'bertscore' #, 'bleurt',
+    'length', 'repetition', 'rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt', 'nubia', 'perplexity'
 )
 _DEFAULT_METRIC_NAMES_SRC = ('abstractness', )
 
@@ -23,7 +23,7 @@ class MetricReporter():
         self,
         metric_names: Tuple[str] = None,
         task: str = None,
-        lang: str = None,
+        lang: List = None,
         device: str = 'cuda',
     ):
         self.metric_names = metric_names
@@ -91,7 +91,7 @@ class MetricReporter():
             metric_names = self.metric_names
 
         for metric_name in metric_names:
-            component_logger.info(f'Computing {metric_name}')
+            component_logger.info(f'Computing {metric_name}: {len(predictions)} examples in total')
             if self.d_metrics[metric_name] is None:
                 self.load_metric(metric_name)
             metric = self.d_metrics[metric_name]
