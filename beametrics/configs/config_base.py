@@ -285,7 +285,7 @@ class ConfigBase:
             d_correlations[ref_key]['d_pvalue'] = d_pvalue
 
         # Serializing the correlations
-        path_correlations = os.path.join(path_data, 'correlation', self.file_name_processed)
+        path_correlations = os.path.join(path_data, 'correlation', f'{self.file_name_processed}.{correl_function.__name__}')
         with open(path_correlations, "w") as f_w:
             json.dump(d_correlations, f_w, indent=2)
         component_logger.info(d_correlations) #pprint.pprint

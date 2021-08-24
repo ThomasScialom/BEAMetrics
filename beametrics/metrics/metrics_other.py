@@ -92,7 +92,7 @@ class MetricPerplexity(MetricBase):
                         outputs = self.model(input_ids, labels=target_ids)
                         log_likelihood = outputs[0] * trg_len
 
-                    lls.append(log_likelihood)
+                    lls.append(log_likelihood.nan_to_num())
 
                 ppl = torch.exp(torch.stack(lls).sum() / end_loc).item()
             res.append(ppl)

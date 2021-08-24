@@ -8,7 +8,7 @@ class SummarizationCNNDM(ConfigBase):
 
         file_name = 'summeval.model_annotations.aligned.paired.jsonl'
         file_name_processed = 'processed.summarization.cnndm'
-        metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC + ('questeval_masked', )
+        metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC
 
         name_dataset = 'SummmEval'
         short_name_dataset = 'Sum'

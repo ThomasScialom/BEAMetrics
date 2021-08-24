@@ -14,14 +14,14 @@ class REALSum_eval(ConfigBase):
         name_dataset = 'RealSum'
         short_name_dataset = 'Rea'
         languages = ["en"]
-        task = "Summarization"
+        task = "summarization"
         number_examples = 2500
         nb_refs = 1
         dimensions_definitions = {
             'litepyramid_recall': "A lightweight sampling-based version of the Pyramid that is crowdsourcable. See Crowdsourcing Lightweight Pyramids for Manual Summary Evaluation",
         }
         scale = "likert"
-        source_eval_sets = "NoVQA"
+        source_eval_sets = "CNNDM"
         annotators = "Expert annotators working at the Sorbonne University."
         additional_comments = "100 documents for which 14 abstractive & 11 extractive summaries are annotated following the pyramid method"
         sampled_from = "https://github.com/neulab/REALSumm"

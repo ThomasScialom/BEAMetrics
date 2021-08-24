@@ -1,12 +1,12 @@
-# Table card: NoVQA-Eval (VQA)
+# Table card: OkVQA-Eval (VQA)
 
-This table card grasp all the information for NoVQA-Eval. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
+This table card grasp all the information for OkVQA-Eval. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
 
 **Task:** 
 `VQA`
 
 **Source Evaluation Set(s):** 
-`NoVQA`
+`[OkVQA](https://okvqa.allenai.org/)`
 
 **Language(s):** 
 `en`
@@ -25,7 +25,7 @@ This table card grasp all the information for NoVQA-Eval. The specific definitio
 `300`
 
 **Number Of  References** 
-`8`
+`10`
 
 **Information About The Annotators** 
 `Expert annotators working at the Sorbonne University.`

@@ -16,12 +16,26 @@ Install BEAMetrics:
 (beametrics) $ pip install -e .
 ```
 
-## Download the data
-All the dataset can be downloaded from [this zip file](https://drive.google.com/file/d/1axODMMTTeFUigkyC-JBoE8TgXsDA-CpJ/view?usp=sharing). It needs to be unzipped into the path data before running the correlations.
+Install Nubia metric (not on PyPI, 16/08/2021):
 ```
-cd data/raw
+(beametrics) git clone https://github.com/wl-research/nubia.git
+(beametrics) pip install -r requirements.txt
+```
+
+
+
+## Download the data
+All the dataset can be downloaded from [this zip file](https://drive.google.com/file/d/1ILzn7tRZqBUYf9yb3IskyvLL_eo53dOA/view?usp=sharing). It needs to be unzipped into the path data before running the correlations.
+```
 unzip data.zip
 ```
+
+The folder contains:
+- a subfolder `raw` containing all the original dataset
+- a subfolder `processed` containing all the dataset processed in a unified format
+- a subfolder `correlation` containing all the final correlation results, and the main tables of the paper
+- a subfolder `datacards` containing all the data cards
+
 ## Computing the correlations
 
 Processing the files to a clean json with the metrics computed:
@@ -42,7 +56,9 @@ The optional argument `--dataset` allows to compute only on a specific dataset, 
  
 The list of the datasets and their corresponding configuration can be found in `configs/__init__`.
 
-For each dataset, a data card is available in the [datacard folder](https://github.com/ThomasScialom/BEAMetrics/tree/main/data/datacards)
+## Data Cards:
+
+For each dataset, a data card is available in the [datacard folder](https://github.com/ThomasScialom/BEAMetrics/tree/main/data/datacards). The cards are automatically generated when running `run_all.py`, by filling the template with the dataset configuration as detailed bellow, in *[Adding a new dataset](#adding-a-new-dataset)*. 
 
 ## Adding a new dataset:
 

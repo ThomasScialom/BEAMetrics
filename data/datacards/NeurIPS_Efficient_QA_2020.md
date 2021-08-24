@@ -24,7 +24,7 @@ This table card grasp all the information for NeurIPS_Efficient_QA_2020. The spe
 `1800`
 
 **Number Of  References** 
-`5`
+`1`
 
 **Information About The Annotators** 
 `In 2.3: three separate raters`

@@ -4,26 +4,26 @@ import numpy as np
 from beametrics.configs.config_base import ConfigBase
 from beametrics.metrics.metric_reporter import _DEFAULT_METRIC_NAMES, _DEFAULT_METRIC_NAMES_SRC
 
-class NoVQA_eval_no_human(ConfigBase):
+class OkVQA_eval(ConfigBase):
     def __init__(self):
 
-        file_name = 'NoVQA_evaluation_no_human.json'
-        file_name_processed = 'processed.NoVQA_evaluation_no_human'
+        file_name = 'OkVQA.json'
+        file_name_processed = 'processed.OkVQA'
         metric_names = _DEFAULT_METRIC_NAMES + _DEFAULT_METRIC_NAMES_SRC
 
-        name_dataset = 'NoVQA-Eval'
+        name_dataset = 'OkVQA-Eval'
         short_name_dataset = 'VQA'
         languages = ["en"]
         task = "VQA"
         number_examples = 300
-        nb_refs = 8
+        nb_refs = 10
         dimensions_definitions = {
             'possibility': "Question 1: In your opinion, is the answer possible? Does it make sense in some possible situation? 0: possible, in some conceivable situation / 1: impossible, or makes no sense",
             'obviousness': "Question 2: If the image was shown to 100 people and the question was asked, how many people do you think would give the answer? a number between 1 and 100",
             'correctness': "Question 3: Can you say that the answer is definitely factually correct (use Google if necessary)? 0: definitely correct, 1: can't say (matter of opinion, depends on the situation, the question does not have a 'right' answer, 2: definitely incorrect"
         }
         scale = "binary, likert and multiple choice"
-        source_eval_sets = "NoVQA"
+        source_eval_sets = "[OkVQA](https://okvqa.allenai.org/)"
         annotators = "Expert annotators working at the Sorbonne University."
         additional_comments = "The annotation protocol is detailed on the appendix of this paper."
         sampled_from = "https://github.com/ThomasScialom/BEAMetrics/tree/main/beametrics"

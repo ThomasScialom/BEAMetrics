@@ -3,7 +3,7 @@ from beametrics.utils import component_logger
 from beametrics.metrics import _D_METRICS
 
 _DEFAULT_METRIC_NAMES = (
-    'length', 'repetition', 'rouge', 'sacrebleu', 'meteor', 'bertscore', 'bleurt', 'nubia', 'perplexity'
+    'length', 'repetition', 'rouge', 'sacrebleu', 'meteor', 'perplexity', 'bertscore', 'bleurt', 'nubia',
 )
 _DEFAULT_METRIC_NAMES_SRC = ('abstractness', )
 

@@ -15,7 +15,7 @@ class NeurIPS2020openQA(ConfigBase):
         languages = ["en"]
         task = "QA"
         number_examples = 1800
-        nb_refs = 5
+        nb_refs = 1
         dimensions_definitions = {
             'consistency': "contains predictions that were determined to be definitely correct by annotators,",
             'plausibility': "contains preditions that were determined to be possibly correct given some interpretation of the question.",
