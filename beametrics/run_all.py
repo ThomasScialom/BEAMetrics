@@ -43,7 +43,6 @@ def main():
         config = D_ALL_DATASETS[config_name]()
         config.generate_data_card()
 
-
         for f in [pearsonr, kendalltau]:
             config.pipeline(
                 path_data=args.path_data,

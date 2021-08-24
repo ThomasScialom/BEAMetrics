@@ -25,10 +25,10 @@ class TranslationWMT2019(ConfigBase):
         scale = "pairwise"
         source_eval_sets = "WMT2019"
         annotators = "Paid consultants, sourced by a linguistic service provider company."
-        sampled_from = ""
+        sampled_from = "http://www.statmt.org/wmt19/translation-task.html"
         citation = """@inproceedings{ma2019results,
         title={Results of the WMT19 metrics shared task: Segment-level and strong MT systems pose big challenges},
-        author={Ma, Qingsong and Wei, Johnny and Bojar, Ond{\v{r}}ej and Graham, Yvette},
+        author={Ma, Qingsong and Wei, Johnny and Bojar, Ondrej and Graham, Yvette},
         booktitle={Proceedings of the Fourth Conference on Machine Translation (Volume 2: Shared Task Papers, Day 1)},
         pages={62--90},
         year={2019}
