@@ -48,19 +48,14 @@ Processing the files to a clean json with the metrics computed:
 ```
 python beametrics/run_all.py
 ```
-
-When finished, you can print the final table as in the paper: 
-
-```
-from beametrics.utils import print_final_tables
-print_final_tables()
-```
  
 The optional argument `--dataset` allows to compute only on a specific dataset, e.g.:
 
  `python run_all.py --dataset SummarizationCNNDM`. 
  
 The list of the datasets and their corresponding configuration can be found in `configs/__init__`.
+
+When finished, you can print the final table as in the paper, see the notebook `visualize.ipynb`.
 
 ## Data Cards:
 
