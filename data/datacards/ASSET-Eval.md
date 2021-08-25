@@ -1,4 +1,4 @@
-# Table card: ASSET-Eval (Ass)
+# Table card: ASSET-Eval (Asv)
 
 This table card grasp all the information for ASSET-Eval. The specific definition of each field is available at this [link](https://github.com/ThomasScialom/BEAMetrics#adding-a-new-dataset).
 

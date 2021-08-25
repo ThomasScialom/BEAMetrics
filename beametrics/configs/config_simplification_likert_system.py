@@ -13,7 +13,7 @@ class SimplificationLikertSystem(ConfigBase):
         metric_names = metric_names + ('sari',)
 
         name_dataset = 'ASSET-Eval'
-        short_name_dataset = 'Ass'
+        short_name_dataset = 'Asv'
         languages = ["en"]
         task = "simplification"
         number_examples = 162
