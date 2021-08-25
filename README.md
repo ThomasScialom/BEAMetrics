@@ -21,7 +21,13 @@ Install Nubia metric (not on PyPI, 16/08/2021):
 (beametrics) git clone https://github.com/wl-research/nubia.git
 (beametrics) pip install -r requirements.txt
 ```
+Alternatively, you can remove nubia from `_DEFAULT_METRIC_NAMES` in `metrics.metric_reporter`.
 
+## Reproducing the results
+
+First you need to get the processed files, which include the metric scores. You can do that either by simply downloading the processed data (see [Section Download Data](#download-the-data)), or by re-computing the scores (see [Section Compute Correlations](#computing-the-correlations)). 
+
+Then, the first bloc in the notebook `visualize.ipynb` allows to get all the tables from the paper (and also to generate the latex code in `data/correlation`).
 
 
 ## Download the data
@@ -30,7 +36,7 @@ All the dataset can be downloaded from [this zip file](https://drive.google.com/
 unzip data.zip
 ```
 
-The folder contains:
+The `data` folder contains:
 - a subfolder `raw` containing all the original dataset
 - a subfolder `processed` containing all the dataset processed in a unified format
 - a subfolder `correlation` containing all the final correlation results, and the main tables of the paper

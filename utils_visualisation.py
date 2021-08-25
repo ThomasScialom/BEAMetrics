@@ -171,15 +171,14 @@ def get_d_scores_global(D_ALL_DATASETS, d_short_task, correl_function, path_corr
         with open(f'{path_correlations}{file_name_processed}.{correl_function}', 'r') as f:
             correl_file = json.load(f)
 
-        for name_dim_glob, name_dim_dataset in D_ALL_DATASETS[dataset]['map_dim'].items():
+        for name_dim_print, name_dim_dataset in D_ALL_DATASETS[dataset]['map_dim'].items():
 
-            if name_dim_glob not in d_scores_global:
-                name_dim_glob = 'other'
+            name_dim_glob = name_dim_print if name_dim_print in d_scores_global else 'other'
 
             name_col = f'{config.short_name_dataset}<{name_dim_dataset}>'
             if name_col not in d_scores_global[name_dim_glob]['header']:
                 d_scores_global[name_dim_glob]['header'][name_col] = {
-                    'task': d_short_task[config.task], 'dimension': name_dim_dataset
+                    'task': d_short_task[config.task], 'dimension': name_dim_print
                 }
 
             # ______________________________________________________ Max Ref  ______________________________________________________
