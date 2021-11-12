@@ -4,9 +4,9 @@ PACKAGE_NAME = 'BEAMetrics'
 VERSION = "0.0.1"
 DESCRIPTION = "Benchmark to Evaluate Automatic Metrics in Natural Language Generation"
 KEYWORDS = "NLP NLG Metric Evaluation Summarization Simplification Image Captioning Data2text Question Answering Generation Multilingual deep learning Transformer Pytorch HuggingFace"
-URL = 'https://github.com/xxx/BEAMetrics'
-EMAIL = 'xxx@gmail.com'
-AUTHOR = 'Thomas xxx'
+URL = 'https://github.com/ThomasScialom/BEAMetrics'
+EMAIL = 't.scialom@gmail.com'
+AUTHOR = 'Thomas Scialom'
 LICENSE = 'MIT License'
 REQUIRES_PYTHON = '>=3.8.0'
 EXTRAS = {}
